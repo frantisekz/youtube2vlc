@@ -2,28 +2,32 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import subprocess
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt4 import QtGui, QtCore
 
-
-class Youtube2VLC(QtGui.QWidget):
+class Youtube2VLC(QtGui.QMainWindow):
     
     def __init__(self):
         super(Youtube2VLC, self).__init__()
-        
         self.initUI()
         
     def initUI(self):      
-
-        self.btn = QtGui.QPushButton('Another URL', self)
-        self.btn.move(20, 20)
+        self.btn = QtGui.QPushButton('Enter URL', self)
+        self.btn.move(40, 20)
         self.btn.clicked.connect(self.showDialog)
         
+        self.btn = QtGui.QPushButton('Exit', self)
+        self.btn.move(180, 20)
+        self.btn.clicked.connect(QtGui.qApp.quit)
+
+	lbl = QtGui.QLabel('Last URL:', self)
+        lbl.move(10, 60)
+
+	self.lurl = QtGui.QLineEdit(self)
+        self.lurl.move(100, 60)
+
         self.setGeometry(100, 100, 290, 100)
         self.setWindowTitle('Youtube2VLC')
         self.show()
-	self.showDialog()
         
     def showDialog(self):
         
@@ -31,8 +35,9 @@ class Youtube2VLC(QtGui.QWidget):
             'Enter video url:')
         
         if ok:
-         self.setWindowTitle('Youtube2VLC')
-	os.system("vlc "+ str(text))	
+	 self.lurl.setText(str(text))
+	 os.system("vlc "+ str(text))	
+
         
 def main():
     
