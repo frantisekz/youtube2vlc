@@ -5,6 +5,7 @@ from PyQt4 import QtGui, QtCore
 
 def play():
     os.system("vlc "+ (str(yturledit.text())) + " --play-and-exit")
+    yturledit.clear()
 
 app = QtGui.QApplication(sys.argv)
 mainWindow = QtGui.QMainWindow()
